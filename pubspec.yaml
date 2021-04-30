@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  url_launcher: ^6.0.0 #required to enable network images
+  align_positioned: ^2.0.1
   flutter:
     sdk: flutter
 

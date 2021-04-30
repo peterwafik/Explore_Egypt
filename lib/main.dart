@@ -3,14 +3,14 @@ import 'Screens/Welcome/welcome_screen.dart';
 import 'constants.dart';
 
 
-void main() => runApp(MyApp());
+void main() => runApp(ExploreEgypt());
 
-class MyApp extends StatelessWidget {
+class ExploreEgypt extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, 
       title: 'Authentication step',
       theme: ThemeData(
         primaryColor: kPrimaryColor,

@@ -7,9 +7,11 @@ import 'package:explore_egypt/components/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../login_screen.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
+
   const Body({
     Key key,
   }) : super(key: key);
@@ -47,7 +49,8 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AfterAuthScreen();
+                      LoginScreen.afterScreen=AfterAuthScreen();
+                      return LoginScreen.afterScreen;
                     },
                   ),
                 );
