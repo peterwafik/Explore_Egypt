@@ -33,8 +33,15 @@ dependencies:
   flutter_svg: ^0.21.0+1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.9.0
+
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path: "assets/icon/icon1.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -63,9 +70,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
+  #fonts:
+  #  - family: OpenSans
+  #    fonts:
+  #      - asset: assets/fonts/openSans/OpenSans-Light.ttf
+  #      - weight: 300
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
