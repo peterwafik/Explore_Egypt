@@ -1,7 +1,7 @@
 import 'package:explore_egypt/Screens/AfterAuthentication/description_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:explore_egypt/models/Locations.dart';
+import 'package:explore_egypt/data/Locations.dart';
 import 'package:explore_egypt/models/location_info.dart';
 import 'package:explore_egypt/Screens/Form/locationForm.dart';
 import 'package:flutter/widgets.dart';
