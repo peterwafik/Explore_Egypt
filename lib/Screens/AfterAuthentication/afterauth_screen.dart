@@ -114,7 +114,7 @@ import '../Login/login_screen.dart';
 
               onTap: () {
                 Navigator.push(
-                    context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
+                    LoginScreen.afterScreen.context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
               },
             ),
 
