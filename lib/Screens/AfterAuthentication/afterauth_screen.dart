@@ -1,4 +1,7 @@
 import 'package:explore_egypt/Screens/AfterAuthentication/description_screen.dart';
+import 'package:explore_egypt/components/sidebar.dart';
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_egypt/models/Locations.dart';
@@ -10,13 +13,11 @@ import '../Login/login_screen.dart';
 
   class AfterAuthScreen extends StatefulWidget {
     @override
-
-
     _AfterAuthScreenState stateAfter=_AfterAuthScreenState();
     _AfterAuthScreenState createState() =>stateAfter;
 
     BuildContext context;
-    static List<Location> locations=(new locationsAll()).listobj;
+    static List<Location> locations=(new locationsAll()).listobj;// listobj bta3et locationsall instead of getter
   }
 
   class _AfterAuthScreenState extends State<AfterAuthScreen> {
@@ -46,6 +47,9 @@ import '../Login/login_screen.dart';
             backgroundColor: kPrimaryColor,
           ),
           body: getListView(context),
+          drawer: Drawer(
+            child: MainDrawer(),
+          ),
         ),
       );
     }
@@ -114,8 +118,8 @@ import '../Login/login_screen.dart';
 
               onTap: () {
                 Navigator.push(
-                    context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
-              },
+                    LoginScreen.afterScreen.context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
+              },// ':' called initializer list. It is a (,)separated list of expressions that can access constructor parameters and assign to instance fields, even final instance fields.
             ),
 
             background: Container(color: Colors.red),

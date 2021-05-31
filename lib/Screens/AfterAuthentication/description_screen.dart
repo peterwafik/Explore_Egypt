@@ -1,3 +1,5 @@
+//import 'package:explore_egypt/sidebar/navigation_bloc.dart';
+import 'package:explore_egypt/components/sidebar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_egypt/models/location_info.dart';
@@ -6,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants.dart';
 class Description extends StatelessWidget {
   Location l;
+  //constructor
   Description({this.l}){
 
   }
@@ -52,6 +55,9 @@ class Description extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontFamily: 'Cinzel-Regular'),
               )),
         ],
+      ),
+      drawer: Drawer(
+        child: MainDrawer(),
       ),
     );
   }
