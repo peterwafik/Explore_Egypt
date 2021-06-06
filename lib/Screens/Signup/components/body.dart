@@ -7,10 +7,16 @@ import 'package:explore_egypt/components/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../authentication_service.dart';
+import 'package:provider/provider.dart';
+
 import 'background.dart';
 import 'or_divider.dart';
 
 class Body extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,22 +36,25 @@ class Body extends StatelessWidget {
             ),
             RoundedInputField(
               hintText: "Your Email",
+              controller:  emailController,
               onChanged: (value) {},
             ),
             RoundedPasswordField(
+              controller: passwordController,
               onChanged: (value) {},
             ),
             RoundedButton(
               text: "SIGNUP",
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
+                context.read<AuthenticationService>().signUp(
+                  email: emailController.text.trim(),
+                  password: passwordController.text.trim(),
                 );
+                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LoginScreen();
+                },
+                ),
+                );*/
               },
             ),
             SizedBox(height: size.height * 0.03),

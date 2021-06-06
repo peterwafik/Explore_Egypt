@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "734086404745",
+    "project_id": "explore-egypt-b1b5c",
+    "storage_bucket": "explore-egypt-b1b5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734086404745:android:9844750b82fa67b7160458",
+        "android_client_info": {
+          "package_name": "com.example.explore_egypt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "734086404745-djhcu7ipqo732ela41s8q8rv9neqr4j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_VCZEnMy6ylHoUflTlrtqEz5rZ3KgHOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "734086404745-djhcu7ipqo732ela41s8q8rv9neqr4j3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

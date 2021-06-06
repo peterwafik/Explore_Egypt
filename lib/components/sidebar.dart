@@ -3,6 +3,10 @@ import 'package:explore_egypt/Screens/Login/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../authentication_service.dart';
+import 'package:provider/provider.dart';
+
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
 
@@ -87,6 +91,7 @@ class MainDrawer extends StatelessWidget {
 
       ListTile(
         onTap: () {
+          context.read<AuthenticationService>().signOut();
            Navigator.push(context,MaterialPageRoute(builder: (context) {
              return LoginScreen();
            },
@@ -97,7 +102,7 @@ class MainDrawer extends StatelessWidget {
           Icons.assignment_return_outlined,
           color: Colors.black,
         ),
-        title: Text("Logout"),
+        title: Text("Signout"),
       ),
     ]);
   }

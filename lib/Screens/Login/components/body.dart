@@ -7,19 +7,23 @@ import 'package:explore_egypt/components/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../authentication_service.dart';
+import 'package:provider/provider.dart';
 import '../login_screen.dart';
 import 'background.dart';
 
 class Body extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  const Body({
-    Key key,
-  }) : super(key: key);
+  Body({Key key,}) : super(key: key); //elmafroud teb2a const
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
+      key: _formKey,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,23 +41,26 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
+              controller:  emailController,
               onChanged: (value) {},
             ),
             RoundedPasswordField(
+              controller: passwordController,
               onChanged: (value) {},
             ),
             RoundedButton(
               text: "LOGIN",
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
+                context.read<AuthenticationService>().signIn(
+                  email: emailController.text.trim(),
+                  password: passwordController.text.trim(),
+                );
+                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                       LoginScreen.afterScreen=AfterAuthScreen();
                       return LoginScreen.afterScreen;
                     },
                   ),
-                );
+                );*/
               },
             ),
             SizedBox(height: size.height * 0.03),
