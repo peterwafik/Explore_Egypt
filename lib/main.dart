@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Screens/AfterAuthentication/afterauth_screen.dart';
+import 'Screens/Login/login_screen.dart';
 import 'Screens/Signup/signup_screen.dart';
 import 'Screens/Welcome/welcome_screen.dart';
 import 'authentication_service.dart';
@@ -16,8 +17,14 @@ Future<void> main() async { //1.initialize firebase app
   runApp(ExploreEgypt());
 }
 class ExploreEgypt extends StatelessWidget {
+  static User firebaseUser;
+  static String currentUserMail="";
+  static String currentUserPass="";
   @override
-  Widget build(BuildContext context) {//5.provide both authentication CLass and user stream got from authentication class
+  Widget build(BuildContext context) {
+    //ExploreEgypt.mainContext=context;
+    //5.provide both authentication CLass and user stream got from authentication class
+
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -41,12 +48,11 @@ class ExploreEgypt extends StatelessWidget {
 }
 class AuthenticationWrapper extends StatelessWidget {//6. handle the nect scenario after successfully knowing the state of user
   @override
+  static BuildContext context;
   Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
+    AuthenticationWrapper.context=context;
+    ExploreEgypt.firebaseUser = context.watch<User>();
 
-    if (firebaseUser != null) {
-      return AfterAuthScreen();
-    }
     return SignUpScreen();
   }
 }

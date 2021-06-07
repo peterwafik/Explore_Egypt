@@ -12,6 +12,12 @@ import '../../constants.dart';
 import '../Login/login_screen.dart';
 
   class AfterAuthScreen extends StatefulWidget {
+    String mail;
+    String password;
+    AfterAuthScreen(String mail,String password){
+      this.mail=mail;
+      this.password=password;
+    }
     @override
     _AfterAuthScreenState stateAfter=_AfterAuthScreenState();
     _AfterAuthScreenState createState() =>stateAfter;

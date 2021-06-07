@@ -1,7 +1,7 @@
 import 'package:explore_egypt/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_egypt/models/location_info.dart';
-
+import 'package:explore_egypt/main.dart';
 import'package:explore_egypt/Screens/AfterAuthentication/afterauth_screen.dart';
 
 import '../../constants.dart';
@@ -143,7 +143,8 @@ class _FormpageState extends State<Formpage> {
 
                     Navigator.pop(locationForm.formContext);
                     Navigator.pop(LoginScreen.afterScreen.context);
-                     LoginScreen.afterScreen=AfterAuthScreen();
+                     LoginScreen.afterScreen=AfterAuthScreen(ExploreEgypt.currentUserMail
+                         ,ExploreEgypt.currentUserPass);
 
                        Navigator.push(
                            locationForm.formContext , MaterialPageRoute(builder: (context) =>LoginScreen.afterScreen ));
