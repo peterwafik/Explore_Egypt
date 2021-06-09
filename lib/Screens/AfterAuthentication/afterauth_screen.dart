@@ -12,6 +12,12 @@ import '../../constants.dart';
 import '../Login/login_screen.dart';
 
   class AfterAuthScreen extends StatefulWidget {
+    String mail;
+    String password;
+    AfterAuthScreen(String mail,String password){
+      this.mail=mail;
+      this.password=password;
+    }
     @override
     _AfterAuthScreenState stateAfter=_AfterAuthScreenState();
     _AfterAuthScreenState createState() =>stateAfter;
@@ -27,7 +33,7 @@ import '../Login/login_screen.dart';
     @override
     Widget build(BuildContext context) {
 
-      LoginScreen.afterScreen.context=context;
+      SignupScreen.afterScreen.context=context;
       final title = 'Dismissing Items';
       return MaterialApp(
 
@@ -118,7 +124,7 @@ import '../Login/login_screen.dart';
 
               onTap: () {
                 Navigator.push(
-                    LoginScreen.afterScreen.context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
+                    SignupScreen.afterScreen.context , MaterialPageRoute(builder: (context) => new Description(l:locations[index])));
               },// ':' called initializer list. It is a (,)separated list of expressions that can access constructor parameters and assign to instance fields, even final instance fields.
             ),
 

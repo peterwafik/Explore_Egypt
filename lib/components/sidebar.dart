@@ -3,8 +3,11 @@ import 'package:explore_egypt/Screens/Login/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Screens/AfterAuthentication/profile_model/user_preferences.dart';
 import '../authentication_service.dart';
 import 'package:provider/provider.dart';
+
+import '../main.dart';
 
 
 class MainDrawer extends StatelessWidget {
@@ -30,7 +33,7 @@ class MainDrawer extends StatelessWidget {
                 height: 5.0,
               ),
               Text(
-                "Lee Wang",
+                UserPreferences.myUser.name,
                 style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.w800,
@@ -40,7 +43,7 @@ class MainDrawer extends StatelessWidget {
                 height: 5.0,
               ),
               Text(
-                "leewang2@gmail.com",
+                UserPreferences.myUser.name,
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.w400,
@@ -93,7 +96,7 @@ class MainDrawer extends StatelessWidget {
         onTap: () {
           context.read<AuthenticationService>().signOut();
            Navigator.push(context,MaterialPageRoute(builder: (context) {
-             return LoginScreen();
+             return SignupScreen();
            },
     ),
     );
