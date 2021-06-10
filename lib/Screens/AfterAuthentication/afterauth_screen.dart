@@ -11,9 +11,12 @@ import 'package:flutter/widgets.dart';
 import '../../constants.dart';
 import '../Login/login_screen.dart';
 
+import 'package:explore_egypt/authentication_service.dart';
+import 'package:explore_egypt/Screens/database.dart';
   class AfterAuthScreen extends StatefulWidget {
     String mail;
     String password;
+     static String uid;
     AfterAuthScreen(String mail,String password){
       this.mail=mail;
       this.password=password;
@@ -23,7 +26,17 @@ import '../Login/login_screen.dart';
     _AfterAuthScreenState createState() =>stateAfter;
 
     BuildContext context;
-    static List<Location> locations=(new locationsAll()).listobj;// listobj bta3et locationsall instead of getter
+    static List<Location> locations=[ Location(
+        id: 0,
+        name: "Just A Test,Delete Me",
+        description:
+        "Just A Test",
+        theme: "Just A Test",
+        imageUrl:
+        "https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg",
+        locationUrl:
+        'null'),
+    ];//=//(new locationsAll()).listobj;// listobj bta3et locationsall instead of getter
   }
 
   class _AfterAuthScreenState extends State<AfterAuthScreen> {
@@ -130,11 +143,11 @@ import '../Login/login_screen.dart';
 
             background: Container(color: Colors.red),
             key: Key(locations[index].name),
-            onDismissed: (direction) {
+            onDismissed: (direction) async {
               setState(() {
                 locations.removeAt(index);
               });
-
+             // await DatabaseService.updateUserData(locations,AfterAuthScreen.uid);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("location dismissed")));
             },
 

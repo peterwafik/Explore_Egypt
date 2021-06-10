@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import '../../../main.dart';
 import 'background.dart';
 import 'or_divider.dart';
-
+import 'package:explore_egypt/Screens/database.dart';
 class Body extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -64,12 +64,15 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "SIGNUP",
               press: () async {
+                print("before if for validation");
                 if(_formKey.currentState.validate()) {
-                  bool isSignUp = true;
+                  bool isSignUp = false;
                   String x = await AuthenticationWrapper.context.read<
                       AuthenticationService>().signUp(
                     email: mailtext, password: passtext1,
                   );
+                  print(x);
+                  //print("after signup");
                   switch (x) {
                     case "Given String is empty or null":
                       isSignUp = false;
@@ -77,9 +80,11 @@ class Body extends StatelessWidget {
                     case "The password is invalid or the user does not have a password.":
                       isSignUp = false;
                       break;
-                    default :
-                      isSignUp = true;
+                    case "Signed up":
+                      isSignUp=true;
+
                   }
+                  print(isSignUp);
                   /*Navigator.push(context, MaterialPageRoute(builder: (context) {
                       LoginScreen.afterScreen=AfterAuthScreen();
                       return LoginScreen.afterScreen;
@@ -91,7 +96,9 @@ class Body extends StatelessWidget {
                     ExploreEgypt.currentUserPass = passtext1;
                     UserPreferences.myUser.name = mailtext;
                     UserPreferences.myUser.email = mailtext;
+                    AfterAuthScreen.uid=ExploreEgypt.firebaseUser.uid;
                     SignupScreen.afterScreen = AfterAuthScreen(mailtext, passtext1);
+                  //  await DatabaseService.updateUserData(AfterAuthScreen.locations,AfterAuthScreen.uid);
                     print("done");
                     Navigator.push(
                         context, MaterialPageRoute(

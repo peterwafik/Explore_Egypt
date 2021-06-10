@@ -64,7 +64,7 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "LOGIN",
               press: () async {
-                bool isSignIn=true;
+                bool isSignIn=false;
                 String x=await AuthenticationWrapper.context.read<AuthenticationService>().signIn(
                   email: mailtext, password: passtext,
                 );
@@ -72,7 +72,7 @@ class Body extends StatelessWidget {
                 switch(x){
                   case "Given String is empty or null":isSignIn=false;break;
                   case "The password is invalid or the user does not have a password.":isSignIn=false;break;
-                  default :isSignIn=true;
+                  case "Signed in":isSignIn=true;break;
                 }
 
           //    isSignIn=true;
@@ -84,7 +84,7 @@ class Body extends StatelessWidget {
                     },
                   ),
                 );*/
-
+                print("before if for validation");
                 if ((ExploreEgypt.firebaseUser != null)&&(isSignIn)) {
 
                   ExploreEgypt.currentUserMail=mailtext;
@@ -92,7 +92,9 @@ class Body extends StatelessWidget {
                   UserPreferences.myUser.name=mailtext;
                   UserPreferences.myUser.email=mailtext;
                   SignupScreen.afterScreen=AfterAuthScreen(mailtext,passtext);
-                  print("done");
+
+                  print("testing now");
+                  print(AfterAuthScreen.locations.length);
                   Navigator.push(
                       context , MaterialPageRoute(builder: (context) =>SignupScreen.afterScreen ));
 
