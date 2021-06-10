@@ -82,7 +82,7 @@ class Body extends StatelessWidget {
                 if(_formKey.currentState.validate()) {
                   isSignIn = false;
                   x = await AuthenticationWrapper.context.read<
-                      AuthenticationService>().signUp(email: mailtext, password: passtext,);
+                      AuthenticationService>().signIn(email: mailtext, password: passtext);
 
                   switch(x){
                   case "Given String is empty or null":isSignIn=false;

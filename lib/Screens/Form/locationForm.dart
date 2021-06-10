@@ -37,127 +37,172 @@ class _FormpageState extends State<Formpage> {
   String value3 = "";
   String value4 = "";
   String value5 = "";
- // Favourites fav= new Favourites();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // Favourites fav= new Favourites();
 
   void _setValues() {
-  currentLocation = new Location(name:value1,locationUrl: value2,theme:value3,imageUrl: value4,description: value5) ;
-   // fav.elements.add(newWidget);
+    currentLocation = new Location(name:value1,locationUrl: value2,theme:value3,imageUrl: value4,description: value5) ;
+    // fav.elements.add(newWidget);
 
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text('Form'),
-      ),
-      body: //Center(  //the used one 4/30/2021
-         SingleChildScrollView(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-            Row(children: [
-              Icon(Icons.add_circle_outline_sharp,
-                  color: const Color(0xFF000000), size: 20.0),
-              Expanded(
-                child: TextField(
-                  onChanged: (value) => value1 = value,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: "Name",
-                      border:
-                      OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                ),
+    return Form(
+        key:_formKey,
+        child: Scaffold(
+          appBar: new AppBar(
+            title: new Text('Form'),
+          ),
+          body: //Center(  //the used one 4/30/2021
+          SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(children: [
+                      Icon(Icons.add_circle_outline_sharp,
+                          color: const Color(0xFF000000), size: 20.0),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (value) => value1 = value,
+                          validator: (value){
+                            if ( value.isEmpty) {
+                              return 'Text is empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Name",
+                              border:
+                              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                        ),
+                      )
+                    ]),
+                    Padding(padding: const EdgeInsets.symmetric(
+                        vertical: 3)),
+                    Row(children: [
+                      Icon(Icons.add_circle_outline_sharp,
+                          color: const Color(0xFF000000), size: 20.0),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (value) => value2 = value,
+                          validator: (value){
+                            if ( value.isEmpty) {
+                              print("if in text");
+                              return 'Text is empty';
+                            }
+                            print("else in text");
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Location",
+                              border:
+                              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                        ),
+                      )
+                    ]),Padding(padding: const EdgeInsets.symmetric(
+                        vertical: 3)),
+                    Row(children: [
+                      Icon(Icons.add_circle_outline_sharp,
+                          color: const Color(0xFF000000), size: 20.0),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (value) => value3 = value,
+                          validator: (value){
+                            if ( value.isEmpty) {
+                              return 'Text is empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Theme",
+                              border:
+                              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                        ),
+                      )
+                    ]),Padding(padding: const EdgeInsets.symmetric(
+                        vertical: 3)),
+                    Row(children: [
+                      Icon(Icons.add_circle_outline_sharp,
+                          color: const Color(0xFF000000), size: 20.0),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (value) => value4 = value,
+                          validator: (value){
+                            if ( value.isEmpty) {
+                              return 'Text is empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "image-Url",
+                              border:
+                              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                        ),
+                      )
+                    ]),Padding(padding: const EdgeInsets.symmetric(
+                        vertical: 3)),
+                    Row(children: [
+                      Icon(Icons.add_circle_outline_sharp,
+                          color: const Color(0xFF000000), size: 20.0),
+                      Expanded(
+                        child: TextFormField(
+                          onChanged: (value) => value5 = value,
+                          validator: (value){
+                            if ( value.isEmpty) {
+                              return 'Text is empty';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                              hintText: "Full-Description",
+                              border:
+                              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                        ),
+                      )
+                    ]),Padding(padding: const EdgeInsets.symmetric(
+                        vertical: 3)),
+                    RoundedButton(
+                      text: "ADD",
+                      color: kPrimaryLightColor,
+                      textColor: Colors.black,
+                      press: () async{
+                        if(_formKey.currentState.validate()) {  //this checks that all validations is correct
+                          print("if part");
+                          _setValues();
+                          AfterAuthScreen.locations.add(currentLocation);
+                          print(AfterAuthScreen.uid);
+                          await DatabaseService.updateUserData(
+                              AfterAuthScreen.locations, AfterAuthScreen.uid);
+                          Navigator.pop(locationForm.formContext);
+                          Navigator.pop(SignupScreen.afterScreen.context);
+                          SignupScreen.afterScreen =
+                              AfterAuthScreen(ExploreEgypt.currentUserMail
+                                  , ExploreEgypt.currentUserPass);
+
+                          Navigator.push(
+                              locationForm.formContext, MaterialPageRoute(
+                              builder: (context) => SignupScreen.afterScreen));
+                        }
+                        else{
+                          print("else part");
+
+                        }
+                      },
+                    ),
+                  ]
               )
-            ]),
-            Padding(padding: const EdgeInsets.symmetric(
-                vertical: 3)),
-            Row(children: [
-              Icon(Icons.add_circle_outline_sharp,
-                  color: const Color(0xFF000000), size: 20.0),
-              Expanded(
-                child: TextField(
-                  onChanged: (value) => value2 = value,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                      hintText: "Location",
-                      border:
-                      OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                ),
-              )
-            ]),Padding(padding: const EdgeInsets.symmetric(
-                    vertical: 3)),
-            Row(children: [
-                  Icon(Icons.add_circle_outline_sharp,
-                      color: const Color(0xFF000000), size: 20.0),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) => value3 = value,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "Theme",
-                          border:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                    ),
-                  )
-                ]),Padding(padding: const EdgeInsets.symmetric(
-                    vertical: 3)),
-                Row(children: [
-                  Icon(Icons.add_circle_outline_sharp,
-                      color: const Color(0xFF000000), size: 20.0),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) => value4 = value,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "image-Url",
-                          border:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                    ),
-                  )
-                ]),Padding(padding: const EdgeInsets.symmetric(
-                    vertical: 3)),
-                Row(children: [
-                  Icon(Icons.add_circle_outline_sharp,
-                      color: const Color(0xFF000000), size: 20.0),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) => value5 = value,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "Full-Description",
-                          border:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                    ),
-                  )
-                ]),Padding(padding: const EdgeInsets.symmetric(
-                    vertical: 3)),
-               RoundedButton(
-                     text: "ADD",
-                     color: kPrimaryLightColor,
-                     textColor: Colors.black,
-                     press: () async{
-                       _setValues();
-                       AfterAuthScreen.locations.add(currentLocation);
-                       print(AfterAuthScreen.uid);
-                       await DatabaseService.updateUserData(AfterAuthScreen.locations,AfterAuthScreen.uid);
-                    Navigator.pop(locationForm.formContext);
-                    Navigator.pop(SignupScreen.afterScreen.context);
-                     SignupScreen.afterScreen=AfterAuthScreen(ExploreEgypt.currentUserMail
-                         ,ExploreEgypt.currentUserPass);
-
-                       Navigator.push(
-                           locationForm.formContext , MaterialPageRoute(builder: (context) =>SignupScreen.afterScreen ));
-
-                     },
-      ),
-    ]
-          )
 
 
-      ),
+          ),
+        )
     );
   }
 }

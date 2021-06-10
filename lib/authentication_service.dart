@@ -58,17 +58,7 @@ class AuthenticationService {
 
       User user =result.user;
       ExploreEgypt.firebaseUser=user;
-       List<Location> locations=[ Location(
-           id: 0,
-           name: "Just A Test,Delete Me",
-           description:
-           "Just A Test",
-           theme: "Just A Test",
-           imageUrl:
-           "https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg",
-           locationUrl:
-          'null'),
-       ];
+       List<Location> locations=new locationsAll().listobj;
     AfterAuthScreen.locations=locations;
       await DatabaseService.updateUserData(locations,user.uid);
 

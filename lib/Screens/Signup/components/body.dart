@@ -69,18 +69,18 @@ class Body extends StatelessWidget {
                 RoundedButton(
                   text: "SIGNUP",
                   press: () async {
-                    print("before if for validation");
 
                     if(_formKey.currentState.validate()) {
                       isSignUp = false;
-                      x = await AuthenticationWrapper.context.read<
-                          AuthenticationService>().signUp(email: mailtext, password: passtext1,);
-
-                      if(passtext2.compareTo(passtext1)!=0){
+                      if(passtext2.compareTo(passtext1)!=0) {
                         isSignUp =false ;
                         x = "passwords are not identical" ;
                       }
-                      print(x);
+                      else{
+                        x = await AuthenticationWrapper.context.read<
+                            AuthenticationService>().signUp(
+                          email: mailtext, password: passtext1,);
+                      }
                       //print("after signup");
                       switch (x) {
                         case "passwords are not identical":
@@ -97,12 +97,6 @@ class Body extends StatelessWidget {
 
                       }
                       print(isSignUp);
-                      /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      LoginScreen.afterScreen=AfterAuthScreen();
-                      return LoginScreen.afterScreen;
-                    },
-                  ),
-                );*/
                       if ((ExploreEgypt.firebaseUser != null) && (isSignUp)) {
                         ExploreEgypt.currentUserMail = mailtext;
                         ExploreEgypt.currentUserPass = passtext1;
