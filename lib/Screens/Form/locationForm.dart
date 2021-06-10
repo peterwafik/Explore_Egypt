@@ -1,4 +1,5 @@
 import 'package:explore_egypt/components/rounded_button.dart';
+import 'package:explore_egypt/Screens/database.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_egypt/models/location_info.dart';
 import 'package:explore_egypt/main.dart';
@@ -137,10 +138,11 @@ class _FormpageState extends State<Formpage> {
                      text: "ADD",
                      color: kPrimaryLightColor,
                      textColor: Colors.black,
-                     press: () {
+                     press: () async{
                        _setValues();
                        AfterAuthScreen.locations.add(currentLocation);
-
+                       print(AfterAuthScreen.uid);
+                       await DatabaseService.updateUserData(AfterAuthScreen.locations,AfterAuthScreen.uid);
                     Navigator.pop(locationForm.formContext);
                     Navigator.pop(SignupScreen.afterScreen.context);
                      SignupScreen.afterScreen=AfterAuthScreen(ExploreEgypt.currentUserMail

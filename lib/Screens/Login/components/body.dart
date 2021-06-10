@@ -24,20 +24,32 @@ import 'package:explore_egypt/authentication_service.dart';
 import 'package:explore_egypt/constants.dart';
 
 class Body extends StatelessWidget {
+  String x = "" ;//peter's last
+  bool isSignIn = false ;//peter's last
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String mailtext="";
   String passtext="";
-  Body({Key key,}) : super(key: key); //elmafroud teb2a const
+  /*final _snackBar1 = SnackBar(
+    content: Text('Wrong email format'),
+  );
+  final _snackBar2 = SnackBar(
+    content: Text('password is at least 6 chars'),
+  );
+  final _snackBar3 = SnackBar(
+    content: Text('passwords doesnt match'),
+  );*/
+  Body({Key key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Background(
-      key: _formKey,
-      child: SingleChildScrollView(
-        child: Column(
+    return Form(
+       key:_formKey,
+       child: Background(
+         child: SingleChildScrollView(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
@@ -55,35 +67,33 @@ class Body extends StatelessWidget {
               hintText: "Your Email",
               controller:  emailController,
               onChanged: (value) {mailtext=value;},
+              validator1 : mailtext,
             ),
             RoundedPasswordField(
               hintText: "Password",
               controller: passwordController,
               onChanged: (value) {passtext=value;},
+              validator2:passtext,
+
             ),
             RoundedButton(
               text: "LOGIN",
               press: () async {
-                bool isSignIn=true;
-                String x=await AuthenticationWrapper.context.read<AuthenticationService>().signIn(
-                  email: mailtext, password: passtext,
-                );
-                print(x);
-                switch(x){
-                  case "Given String is empty or null":isSignIn=false;break;
-                  case "The password is invalid or the user does not have a password.":isSignIn=false;break;
-                  default :isSignIn=true;
+                if(_formKey.currentState.validate()) {
+                  isSignIn = false;
+                  x = await AuthenticationWrapper.context.read<
+                      AuthenticationService>().signUp(email: mailtext, password: passtext,);
+
+                  switch(x){
+                  case "Given String is empty or null":isSignIn=false;
+                  break;
+                  case "The password is invalid or the user does not have a password.":isSignIn=false;
+                  break;
+                  case "Signed in":isSignIn=true;
+                  break;
                 }
 
-          //    isSignIn=true;
 
-
-                /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      LoginScreen.afterScreen=AfterAuthScreen();
-                      return LoginScreen.afterScreen;
-                    },
-                  ),
-                );*/
 
                 if ((ExploreEgypt.firebaseUser != null)&&(isSignIn)) {
 
@@ -92,11 +102,9 @@ class Body extends StatelessWidget {
                   UserPreferences.myUser.name=mailtext;
                   UserPreferences.myUser.email=mailtext;
                   SignupScreen.afterScreen=AfterAuthScreen(mailtext,passtext);
-                  print("done");
-                  Navigator.push(
-                      context , MaterialPageRoute(builder: (context) =>SignupScreen.afterScreen ));
 
-
+                  print(AfterAuthScreen.locations.length);
+                  Navigator.push(context , MaterialPageRoute(builder: (context) =>SignupScreen.afterScreen ));
 
                 }
                 ExploreEgypt.currentUserMail="null";
@@ -104,7 +112,7 @@ class Body extends StatelessWidget {
                 return SignUpScreen();
 
 
-              },
+              }},
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
@@ -122,6 +130,6 @@ class Body extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
